@@ -1,275 +1,258 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="zh-TW">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #4689cc; -webkit-text-stroke: #4689cc; background-color: #171818}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #4689cc; -webkit-text-stroke: #4689cc; background-color: #171818; min-height: 16.0px}
-    span.s1 {font-kerning: none}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>香港吃吃 Vibe Trip</title>
+    
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 引入 Vue.js 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- 設定 Tailwind 主題顏色 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#9E2A2B',    /* 胭脂紅 */
+                        secondary: '#546A7B',  /* 灰藍色 */
+                        bg: '#F9F7F2',         /* 暖紙白 */
+                        accent: '#E09F3E',     /* 點綴金 */
+                        surface: '#FFFFFF'
+                    },
+                    fontFamily: {
+                        serif: ['"Noto Serif TC"', 'serif'],
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* 自定義樣式補充 */
+        body { background-color: #F9F7F2; }
+        
+        /* 隱藏 Scrollbar 但保留功能 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* 地圖 iframe 容器 */
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* 簡單的淡入動畫 */
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity 0.3s ease;
+        }
+        .fade-enter-from, .fade-leave-to {
+            opacity: 0;
+        }
+    </style>
 </head>
-<body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html lang="zh-TW"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;title&gt;香港吃吃 Vibe Trip&lt;/title&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- 引入 Tailwind CSS --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- 引入 Vue.js 3 --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script src="https://unpkg.com/vue@3/dist/vue.global.js"&gt;&lt;/script&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- Google Fonts --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&amp;family=Noto+Sans+TC:wght@300;400;500;700&amp;display=swap" rel="stylesheet"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- 設定 Tailwind 主題顏色 --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>tailwind.config = {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>theme: {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>extend: {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>colors: {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>primary: '#9E2A2B',<span class="Apple-converted-space">    </span>/* 胭脂紅 */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>secondary: '#546A7B',<span class="Apple-converted-space">  </span>/* 灰藍色 */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>bg: '#F9F7F2', <span class="Apple-converted-space">        </span>/* 暖紙白 */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>accent: '#E09F3E', <span class="Apple-converted-space">    </span>/* 點綴金 */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>surface: '#FFFFFF'</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>fontFamily: {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>serif: ['"Noto Serif TC"', 'serif'],</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>sans: ['"Noto Sans TC"', 'sans-serif'],</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;style&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* 自定義樣式補充 */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>body { background-color: #F9F7F2; }</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* 隱藏 Scrollbar 但保留功能 */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.no-scrollbar::-webkit-scrollbar {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: none;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.no-scrollbar {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>-ms-overflow-style: none;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>scrollbar-width: none;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* 地圖 iframe 容器 */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.map-container iframe {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>width: 100%;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>height: 100%;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border: none;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* 簡單的淡入動畫 */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.fade-enter-active, .fade-leave-active {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transition: opacity 0.3s ease;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.fade-enter-from, .fade-leave-to {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>opacity: 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;body class="text-gray-800 font-sans antialiased h-screen overflow-hidden flex flex-col"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="app" class="h-full flex flex-col"&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;!-- Header 區域 --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;header class="flex-none bg-bg pt-6 pb-2 px-6 text-center shadow-sm z-20 relative"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h1 class="text-3xl font-serif text-primary font-bold tracking-wide"&gt;香港吃吃&lt;/h1&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;p class="text-xs text-gray-500 uppercase tracking-[0.2em] mt-1"&gt;Citywalk &amp; Culinary Journal&lt;/p&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;!-- 天數切換選單 --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="mt-4 flex justify-center space-x-2 max-w-sm mx-auto"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;button<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>v-for="day in [1, 2, 3]"<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>:key="day"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>@click="currentDay = day"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>:class="[</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>'flex-1 py-2 rounded-full text-sm font-serif italic transition-all duration-300',</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>currentDay === day<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>? 'bg-primary text-white shadow-lg shadow-primary/30 transform -translate-y-0.5'<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>: 'text-gray-400 hover:text-gray-600'</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>]"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>Day {{ day }}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/header&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;!-- 主內容區域：分左右欄 (電腦) 或 上下 (手機) --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;main class="flex-1 flex flex-col md:flex-row overflow-hidden relative"&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;!-- 左側：行程列表 (可捲動) --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="flex-1 overflow-y-auto no-scrollbar p-4 md:p-8 md:max-w-[500px] pb-32 md:pb-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;transition-group name="fade" tag="div"&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div v-for="(item, index) in currentItinerary" :key="item.id" class="relative pl-6 mb-8 group"&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;!-- 時間軸線 --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div v-if="index !== currentItinerary.length - 1" class="absolute left-[11px] top-6 bottom-[-32px] w-[2px] bg-gray-200"&gt;&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;!-- 時間軸點 --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>class="absolute left-1 top-6 w-5 h-5 rounded-full border-2 border-primary bg-bg z-10 transition-colors duration-300"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>:class="selectedLocation?.id === item.id ? 'bg-primary' : ''"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&gt;&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;!-- 卡片本體 --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>@click="selectLocation(item)"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>class="bg-white rounded-2xl p-5 shadow-[0_10px_30px_rgba(0,0,0,0.04)] border border-transparent hover:border-primary/20 transition-all cursor-pointer transform hover:scale-[1.01]"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>:class="selectedLocation?.id === item.id ? 'ring-2 ring-primary/20' : ''"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;!-- 時間標籤 --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="inline-block text-[11px] font-bold text-secondary uppercase tracking-wider border-b border-accent/50 pb-0.5 mb-2"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>{{ item.time }}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                            </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;h3 class="text-xl font-serif text-gray-800 mb-2 flex justify-between items-center"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>{{ item.title }}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/h3&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                            </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-sm text-gray-500 font-light leading-relaxed mb-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>{{ item.desc }}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/p&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;!-- Tags --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="flex flex-wrap gap-2 mb-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;span v-for="tag in item.tags" :key="tag.text"<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>:class="tag.class"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>class="text-[10px] px-3 py-1 rounded-md bg-gray-100 text-gray-500"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>{{ tag.text }}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;!-- 按鈕區 --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="flex gap-3"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;a<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>:href="getGoogleMapsUrl(item.query)"<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>target="_blank"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>@click.stop</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>class="flex-1 flex items-center justify-center gap-2 bg-gray-800 text-white text-xs py-2.5 rounded-xl active:scale-95 transition-transform"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;span&gt;📍 導航&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;button<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>@click.stop="selectLocation(item)"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>class="md:hidden px-4 py-2 bg-primary/10 text-primary text-xs rounded-xl font-medium"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>地圖預覽</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/transition-group&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;!-- 底部留白，避免被手機版地圖遮擋 --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="h-48 md:h-0"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;!-- 右側 (電腦) / 底部 (手機)：地圖顯示 --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="fixed bottom-0 left-0 right-0 h-48 md:static md:h-full md:flex-1 bg-gray-100 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] md:shadow-none z-30 transition-transform duration-300"&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div v-if="selectedLocation" class="w-full h-full relative map-container"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                     </span>&lt;!-- 關閉按鈕 (僅手機版) --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                     </span>&lt;button @click="selectedLocation = null" class="md:hidden absolute top-2 right-2 z-10 bg-white/80 backdrop-blur p-1 rounded-full shadow text-gray-600"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"&gt;&lt;path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /&gt;&lt;/svg&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;!-- 使用 Google Maps Embed API (無 Key 模式，僅供 Demo) --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;!-- 注意：正式上線建議申請 API Key --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;iframe<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>:src="`https://maps.google.com/maps?q=${encodeURIComponent(selectedLocation.query)}&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed`"<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>frameborder="0"<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>scrolling="no"<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>marginheight="0"<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>marginwidth="0"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>loading="lazy"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/iframe&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="absolute bottom-4 left-4 right-14 md:left-4 md:right-4 bg-white/90 backdrop-blur-md p-3 rounded-xl border border-white/50 shadow-lg pointer-events-none"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;p class="text-xs text-primary font-bold"&gt;正在檢視&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;p class="text-sm font-medium truncate"&gt;{{ selectedLocation.title }}&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div v-else class="w-full h-full flex items-center justify-center text-gray-400 bg-gray-100 flex-col gap-2"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;span class="text-4xl"&gt;🗺️&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p class="text-sm"&gt;點擊行程卡片以查看地圖&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/main&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const { createApp, ref, computed } = Vue;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>createApp({</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>setup() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const currentDay = ref(1);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const selectedLocation = ref(null);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>// 行程資料 (JSON 格式)</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const itineraryData = {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>1: [</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ id: 101, time: '17:30 - 18:21', title: '前往高鐵 (花壇-新烏日)', desc: '搭計程車至花壇車站，轉乘區間車 2244 號。', query: '花壇車站', tags: [{text:'Taxi', class:''}, {text:'Train', class:''}] },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ id: 102, time: '18:36 - 19:30', title: '高鐵北上 (台中-桃園)', desc: '高鐵 846 次前往桃園，隨即轉乘機捷。', query: '高鐵台中站', tags: [{text:'HSR', class:''}] },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ id: 103, time: '20:00 - 21:45', title: '桃園機場 Check-in', desc: '辦理登機，逛免稅店。航班 21:45 起飛。', query: '桃園國際機場第二航廈', tags: [{text:'Flight', class:''}] },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ id: 104, time: '23:35 - 00:35', title: '抵達香港', desc: 'Hello HK! 落地後辦理出關手續。', query: '香港國際機場', tags: [{text:'Arrival', class:''}] },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ id: 105, time: '01:00 - 02:10', title: '城巴 N21 &amp; 飯店', desc: '搭乘 N21 至信和中心，步行入住仕德福酒店。', query: 'Stanford Hotel Hong Kong', tags: [{text:'Hotel', class:''}] },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>],</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>2: [</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ id: 201, time: '10:30', title: '澳洲牛奶公司', desc: '佐敦必吃！體驗光速服務與超滑炒蛋。', query: '澳洲牛奶公司', tags: [{text:'Food', class:''}] },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ id: 202, time: '13:30', title: '堅尼地城 % Arabica', desc: '搭叮叮車去海邊喝咖啡，IG打卡聖地。', query: '% Arabica Hong Kong Kennedy Town', tags: [{text:'Coffee', class:''}, {text:'Photo', class:''}] },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ id: 203, time: '16:30', title: '中環大館 Tai Kwun', desc: '古蹟與藝術的結合，紅磚牆超好拍。', query: 'Tai Kwun', tags: [{text:'Art', class:''}] },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ id: 204, time: '19:30', title: '銅鑼灣 Shopping', desc: '晚餐後逛逛 Fashion Walk 與希慎廣場。', query: 'Fashion Walk Causeway Bay', tags: [{text:'Shop', class:''}] },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>],</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>3: [</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ id: 301, time: '11:00', title: 'M+ 博物館', desc: '西九龍文化區，亞洲首間全球性當代視覺文化博物館。', query: 'M+ Museum', tags: [{text:'Art', class:''}] },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ id: 302, time: '14:30', title: 'K11 Musea', desc: '全港最美藝術商場，享用精緻下午茶。', query: 'K11 Musea', tags: [{text:'Tea', class:''}] },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ id: 303, time: '17:30', title: '前往機場', desc: '搭乘機場快線，結束三天兩夜的旅程。', query: 'Hong Kong International Airport', tags: [{text:'Bye', class:''}] },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>]</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>};</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>// 自動切換顯示的行程</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const currentItinerary = computed(() =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>return itineraryData[currentDay.value];</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>});</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>// 點擊卡片時設定地圖地點</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const selectLocation = (item) =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>selectedLocation.value = item;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>};</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>// 產生 Google Maps 導航連結</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const getGoogleMapsUrl = (query) =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>// 使用 dir/?api=1&amp;destination= 格式可以直接開啟導航模式</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>return `https://www.google.com/maps/dir/?api=1&amp;destination=${encodeURIComponent(query)}`;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>};</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>return {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>currentDay,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>selectedLocation,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>currentItinerary,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>selectLocation,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>getGoogleMapsUrl</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>};</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}).mount('#app');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+<body class="text-gray-800 font-sans antialiased h-screen overflow-hidden flex flex-col">
+
+    <div id="app" class="h-full flex flex-col">
+        
+        <!-- Header 區域 -->
+        <header class="flex-none bg-bg pt-6 pb-2 px-6 text-center shadow-sm z-20 relative">
+            <h1 class="text-3xl font-serif text-primary font-bold tracking-wide">香港吃吃</h1>
+            <p class="text-xs text-gray-500 uppercase tracking-[0.2em] mt-1">Citywalk & Culinary Journal</p>
+            
+            <!-- 天數切換選單 -->
+            <div class="mt-4 flex justify-center space-x-2 max-w-sm mx-auto">
+                <button 
+                    v-for="day in [1, 2, 3]" 
+                    :key="day"
+                    @click="currentDay = day"
+                    :class="[
+                        'flex-1 py-2 rounded-full text-sm font-serif italic transition-all duration-300',
+                        currentDay === day 
+                            ? 'bg-primary text-white shadow-lg shadow-primary/30 transform -translate-y-0.5' 
+                            : 'text-gray-400 hover:text-gray-600'
+                    ]"
+                >
+                    Day {{ day }}
+                </button>
+            </div>
+        </header>
+
+        <!-- 主內容區域：分左右欄 (電腦) 或 上下 (手機) -->
+        <main class="flex-1 flex flex-col md:flex-row overflow-hidden relative">
+            
+            <!-- 左側：行程列表 (可捲動) -->
+            <div class="flex-1 overflow-y-auto no-scrollbar p-4 md:p-8 md:max-w-[500px] pb-32 md:pb-8">
+                <transition-group name="fade" tag="div">
+                    
+                    <div v-for="(item, index) in currentItinerary" :key="item.id" class="relative pl-6 mb-8 group">
+                        
+                        <!-- 時間軸線 -->
+                        <div v-if="index !== currentItinerary.length - 1" class="absolute left-[11px] top-6 bottom-[-32px] w-[2px] bg-gray-200"></div>
+                        
+                        <!-- 時間軸點 -->
+                        <div 
+                            class="absolute left-1 top-6 w-5 h-5 rounded-full border-2 border-primary bg-bg z-10 transition-colors duration-300"
+                            :class="selectedLocation?.id === item.id ? 'bg-primary' : ''"
+                        ></div>
+
+                        <!-- 卡片本體 -->
+                        <div 
+                            @click="selectLocation(item)"
+                            class="bg-white rounded-2xl p-5 shadow-[0_10px_30px_rgba(0,0,0,0.04)] border border-transparent hover:border-primary/20 transition-all cursor-pointer transform hover:scale-[1.01]"
+                            :class="selectedLocation?.id === item.id ? 'ring-2 ring-primary/20' : ''"
+                        >
+                            <!-- 時間標籤 -->
+                            <div class="inline-block text-[11px] font-bold text-secondary uppercase tracking-wider border-b border-accent/50 pb-0.5 mb-2">
+                                {{ item.time }}
+                            </div>
+                            
+                            <h3 class="text-xl font-serif text-gray-800 mb-2 flex justify-between items-center">
+                                {{ item.title }}
+                            </h3>
+                            
+                            <p class="text-sm text-gray-500 font-light leading-relaxed mb-4">
+                                {{ item.desc }}
+                            </p>
+
+                            <!-- Tags -->
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span v-for="tag in item.tags" :key="tag.text" 
+                                    :class="tag.class"
+                                    class="text-[10px] px-3 py-1 rounded-md bg-gray-100 text-gray-500">
+                                    {{ tag.text }}
+                                </span>
+                            </div>
+
+                            <!-- 按鈕區 -->
+                            <div class="flex gap-3">
+                                <a 
+                                    :href="getGoogleMapsUrl(item.query)" 
+                                    target="_blank"
+                                    @click.stop
+                                    class="flex-1 flex items-center justify-center gap-2 bg-gray-800 text-white text-xs py-2.5 rounded-xl active:scale-95 transition-transform"
+                                >
+                                    <span>📍 導航</span>
+                                </a>
+                                <button 
+                                    @click.stop="selectLocation(item)"
+                                    class="md:hidden px-4 py-2 bg-primary/10 text-primary text-xs rounded-xl font-medium"
+                                >
+                                    地圖預覽
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </transition-group>
+                
+                <!-- 底部留白，避免被手機版地圖遮擋 -->
+                <div class="h-48 md:h-0"></div>
+            </div>
+
+            <!-- 右側 (電腦) / 底部 (手機)：地圖顯示 -->
+            <div class="fixed bottom-0 left-0 right-0 h-48 md:static md:h-full md:flex-1 bg-gray-100 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] md:shadow-none z-30 transition-transform duration-300">
+                
+                <div v-if="selectedLocation" class="w-full h-full relative map-container">
+                     <!-- 關閉按鈕 (僅手機版) -->
+                     <button @click="selectedLocation = null" class="md:hidden absolute top-2 right-2 z-10 bg-white/80 backdrop-blur p-1 rounded-full shadow text-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                    </button>
+
+                    <!-- 使用 Google Maps Embed API (無 Key 模式，僅供 Demo) -->
+                    <!-- 注意：正式上線建議申請 API Key -->
+                    <iframe 
+                        :src="`https://maps.google.com/maps?q=${encodeURIComponent(selectedLocation.query)}&t=&z=15&ie=UTF8&iwloc=&output=embed`" 
+                        frameborder="0" 
+                        scrolling="no" 
+                        marginheight="0" 
+                        marginwidth="0"
+                        loading="lazy">
+                    </iframe>
+                    
+                    <div class="absolute bottom-4 left-4 right-14 md:left-4 md:right-4 bg-white/90 backdrop-blur-md p-3 rounded-xl border border-white/50 shadow-lg pointer-events-none">
+                        <p class="text-xs text-primary font-bold">正在檢視</p>
+                        <p class="text-sm font-medium truncate">{{ selectedLocation.title }}</p>
+                    </div>
+                </div>
+
+                <div v-else class="w-full h-full flex items-center justify-center text-gray-400 bg-gray-100 flex-col gap-2">
+                    <span class="text-4xl">🗺️</span>
+                    <p class="text-sm">點擊行程卡片以查看地圖</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        const { createApp, ref, computed } = Vue;
+
+        createApp({
+            setup() {
+                const currentDay = ref(1);
+                const selectedLocation = ref(null);
+
+                // 行程資料 (JSON 格式)
+                const itineraryData = {
+                    1: [
+                        { id: 101, time: '17:30 - 18:21', title: '前往高鐵 (花壇-新烏日)', desc: '搭計程車至花壇車站，轉乘區間車 2244 號。', query: '花壇車站', tags: [{text:'Taxi', class:''}, {text:'Train', class:''}] },
+                        { id: 102, time: '18:36 - 19:30', title: '高鐵北上 (台中-桃園)', desc: '高鐵 846 次前往桃園，隨即轉乘機捷。', query: '高鐵台中站', tags: [{text:'HSR', class:''}] },
+                        { id: 103, time: '20:00 - 21:45', title: '桃園機場 Check-in', desc: '辦理登機，逛免稅店。航班 21:45 起飛。', query: '桃園國際機場第二航廈', tags: [{text:'Flight', class:''}] },
+                        { id: 104, time: '23:35 - 00:35', title: '抵達香港', desc: 'Hello HK! 落地後辦理出關手續。', query: '香港國際機場', tags: [{text:'Arrival', class:''}] },
+                        { id: 105, time: '01:00 - 02:10', title: '城巴 N21 & 飯店', desc: '搭乘 N21 至信和中心，步行入住仕德福酒店。', query: 'Stanford Hotel Hong Kong', tags: [{text:'Hotel', class:''}] },
+                    ],
+                    2: [
+                        { id: 201, time: '10:30', title: '澳洲牛奶公司', desc: '佐敦必吃！體驗光速服務與超滑炒蛋。', query: '澳洲牛奶公司', tags: [{text:'Food', class:''}] },
+                        { id: 202, time: '13:30', title: '堅尼地城 % Arabica', desc: '搭叮叮車去海邊喝咖啡，IG打卡聖地。', query: '% Arabica Hong Kong Kennedy Town', tags: [{text:'Coffee', class:''}, {text:'Photo', class:''}] },
+                        { id: 203, time: '16:30', title: '中環大館 Tai Kwun', desc: '古蹟與藝術的結合，紅磚牆超好拍。', query: 'Tai Kwun', tags: [{text:'Art', class:''}] },
+                        { id: 204, time: '19:30', title: '銅鑼灣 Shopping', desc: '晚餐後逛逛 Fashion Walk 與希慎廣場。', query: 'Fashion Walk Causeway Bay', tags: [{text:'Shop', class:''}] },
+                    ],
+                    3: [
+                        { id: 301, time: '11:00', title: 'M+ 博物館', desc: '西九龍文化區，亞洲首間全球性當代視覺文化博物館。', query: 'M+ Museum', tags: [{text:'Art', class:''}] },
+                        { id: 302, time: '14:30', title: 'K11 Musea', desc: '全港最美藝術商場，享用精緻下午茶。', query: 'K11 Musea', tags: [{text:'Tea', class:''}] },
+                        { id: 303, time: '17:30', title: '前往機場', desc: '搭乘機場快線，結束三天兩夜的旅程。', query: 'Hong Kong International Airport', tags: [{text:'Bye', class:''}] },
+                    ]
+                };
+
+                // 自動切換顯示的行程
+                const currentItinerary = computed(() => {
+                    return itineraryData[currentDay.value];
+                });
+
+                // 點擊卡片時設定地圖地點
+                const selectLocation = (item) => {
+                    selectedLocation.value = item;
+                };
+
+                // 產生 Google Maps 導航連結
+                const getGoogleMapsUrl = (query) => {
+                    // 使用 dir/?api=1&destination= 格式可以直接開啟導航模式
+                    return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(query)}`;
+                };
+
+                return {
+                    currentDay,
+                    selectedLocation,
+                    currentItinerary,
+                    selectLocation,
+                    getGoogleMapsUrl
+                };
+            }
+        }).mount('#app');
+    </script>
 </body>
 </html>
